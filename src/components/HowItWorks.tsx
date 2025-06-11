@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Rocket, Network, Gears } from 'lucide-react';
+import { Rocket, Network, Settings } from 'lucide-react';
 
 const HowItWorks = () => {
   const steps = [
@@ -17,7 +17,7 @@ const HowItWorks = () => {
       animation: "animate-pulse"
     },
     {
-      icon: Gears,
+      icon: Settings,
       title: "Manage",
       description: "Enjoy seamless property management",
       animation: "animate-spin"

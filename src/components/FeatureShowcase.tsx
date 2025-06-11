@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { Building, MessageSquare, Folder, Coins, Network, Gears } from 'lucide-react';
+import { Building, MessageSquare, Folder, Coins, Network, Settings } from 'lucide-react';
 
 const FeatureShowcase = () => {
   const features = [
@@ -41,7 +41,7 @@ const FeatureShowcase = () => {
       color: "from-pink-500 to-pink-600"
     },
     {
-      icon: Gears,
+      icon: Settings,
       title: "Issue Resolution",
       description: "Streamlined maintenance and support workflow",
       animation: "animate-spin",
