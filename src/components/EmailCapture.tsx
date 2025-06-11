@@ -1,7 +1,8 @@
 
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Mail, CheckCircle } from 'lucide-react';
 
 const EmailCapture = () => {
   const [email, setEmail] = useState('');
@@ -11,128 +12,129 @@ const EmailCapture = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', { email, role, city });
-    setIsSubmitted(true);
-    
-    // Reset form after animation
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setEmail('');
-      setRole('');
-      setCity('');
-    }, 3000);
+    if (email) {
+      setIsSubmitted(true);
+      // Here you would typically send the data to your backend
+      console.log('Email captured:', { email, role, city });
+      
+      // Reset form after 3 seconds
+      setTimeout(() => {
+        setIsSubmitted(false);
+        setEmail('');
+        setRole('');
+        setCity('');
+      }, 3000);
+    }
   };
 
+  if (isSubmitted) {
+    return (
+      <section className="py-20 relative overflow-hidden">
+        <div className="container mx-auto px-4 text-center">
+          <div className="max-w-2xl mx-auto">
+            <div className="bg-white/40 backdrop-blur-sm rounded-3xl p-12 border border-white/50 shadow-2xl">
+              <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-6 animate-bounce" />
+              <h2 className="text-3xl font-bold text-gray-800 mb-4">Welcome Aboard! 🎉</h2>
+              <p className="text-lg text-gray-700 mb-6">
+                You're now on the early access list for PGOwner. We'll notify you as soon as we launch!
+              </p>
+              <div className="bg-gradient-to-r from-orange-500 to-blue-500 text-white px-6 py-3 rounded-full inline-block font-semibold">
+                EARLY BIRD 20% OFF
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
-    <section className="py-20 bg-gradient-to-b from-blue-900 to-gray-900 relative overflow-hidden">
+    <section className="py-20 relative overflow-hidden">
       <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto">
-          <Card className="relative overflow-hidden border-0 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm">
-            <CardContent className="p-12">
-              {!isSubmitted ? (
-                <>
-                  <div className="text-center mb-8">
-                    <div className="text-6xl mb-4 animate-bounce">📧</div>
-                    <h2 className="text-4xl font-bold text-white mb-4">
-                      Stay in the Loop
-                    </h2>
-                    <p className="text-xl text-gray-300">
-                      Be the first to experience the future of PG management
-                    </p>
-                  </div>
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="mb-12">
+            <Mail className="w-16 h-16 text-orange-500 mx-auto mb-6 animate-bounce" />
+            <h2 className="text-4xl lg:text-5xl font-bold text-gray-800 mb-6">
+              Be Among the{' '}
+              <span className="bg-gradient-to-r from-orange-500 to-blue-500 bg-clip-text text-transparent">
+                First to Experience
+              </span>
+            </h2>
+            <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+              Join thousands of PG owners and tenants waiting for the revolutionary PGOwner platform.
+              Get exclusive early access and special launch benefits.
+            </p>
+          </div>
 
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div>
-                        <label className="block text-white text-sm font-bold mb-2">
-                          Email Address *
-                        </label>
-                        <input
-                          type="email"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          required
-                          className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:border-orange-500 focus:bg-white/20 transition-all duration-300"
-                          placeholder="your@email.com"
-                        />
-                      </div>
+          <div className="bg-white/40 backdrop-blur-sm rounded-3xl p-8 md:p-12 border border-white/50 shadow-2xl max-w-2xl mx-auto">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div>
+                <Input
+                  type="email"
+                  placeholder="Enter your email address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full px-6 py-4 text-lg rounded-xl border-2 border-gray-200 focus:border-orange-500 focus:ring-0 bg-white/80"
+                  required
+                />
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <select
+                  value={role}
+                  onChange={(e) => setRole(e.target.value)}
+                  className="w-full px-6 py-4 text-lg rounded-xl border-2 border-gray-200 focus:border-orange-500 focus:ring-0 bg-white/80"
+                >
+                  <option value="">Select your role</option>
+                  <option value="pg-owner">PG Owner</option>
+                  <option value="tenant">Tenant</option>
+                  <option value="both">Both</option>
+                </select>
+                
+                <Input
+                  type="text"
+                  placeholder="Your city"
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                  className="w-full px-6 py-4 text-lg rounded-xl border-2 border-gray-200 focus:border-orange-500 focus:ring-0 bg-white/80"
+                />
+              </div>
 
-                      <div>
-                        <label className="block text-white text-sm font-bold mb-2">
-                          You are a... *
-                        </label>
-                        <select
-                          value={role}
-                          onChange={(e) => setRole(e.target.value)}
-                          required
-                          className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white focus:outline-none focus:border-orange-500 focus:bg-white/20 transition-all duration-300"
-                        >
-                          <option value="" className="bg-gray-800">Select your role</option>
-                          <option value="pg-owner" className="bg-gray-800">PG Owner</option>
-                          <option value="tenant" className="bg-gray-800">Tenant</option>
-                          <option value="both" className="bg-gray-800">Both</option>
-                          <option value="property-manager" className="bg-gray-800">Property Manager</option>
-                        </select>
-                      </div>
-                    </div>
+              <Button
+                type="submit"
+                size="lg"
+                className="w-full bg-gradient-to-r from-orange-500 to-blue-500 hover:from-orange-600 hover:to-blue-600 text-white px-8 py-4 text-lg rounded-xl shadow-xl transform hover:scale-105 transition-all duration-300"
+              >
+                Get Early Access + 20% Off
+              </Button>
 
-                    <div>
-                      <label className="block text-white text-sm font-bold mb-2">
-                        City
-                      </label>
-                      <input
-                        type="text"
-                        value={city}
-                        onChange={(e) => setCity(e.target.value)}
-                        className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:border-orange-500 focus:bg-white/20 transition-all duration-300"
-                        placeholder="Your city"
-                      />
-                    </div>
+              <p className="text-sm text-gray-600 mt-4">
+                🎁 Early bird special: 20% off for the first 1000 subscribers
+              </p>
+            </form>
+          </div>
 
-                    <div className="text-center">
-                      <Button
-                        type="submit"
-                        size="lg"
-                        className="bg-gradient-to-r from-orange-500 to-blue-500 hover:from-orange-600 hover:to-blue-600 text-white px-12 py-4 text-lg font-semibold transform hover:scale-105 transition-all duration-200"
-                      >
-                        Get Early Access
-                      </Button>
-                      <p className="text-sm text-gray-400 mt-4">
-                        Join 1000+ people already waiting for launch
-                      </p>
-                    </div>
-                  </form>
-                </>
-              ) : (
-                <div className="text-center animate-fade-in">
-                  <div className="text-8xl mb-6 animate-bounce">🎉</div>
-                  <h3 className="text-3xl font-bold text-white mb-4">
-                    Welcome Aboard!
-                  </h3>
-                  <p className="text-xl text-gray-300 mb-6">
-                    You're now on the VIP list for early access
-                  </p>
-                  <div className="inline-flex items-center gap-2 bg-green-500/20 px-4 py-2 rounded-full">
-                    <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-                    <span className="text-green-400 font-semibold">Successfully Registered</span>
-                  </div>
-                </div>
-              )}
-            </CardContent>
-
-            {/* Animated Envelope Effect */}
-            <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-orange-500 to-blue-500 animate-pulse" />
-          </Card>
+          {/* Benefits */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+            <div className="bg-white/30 backdrop-blur-sm rounded-xl p-6 border border-white/40">
+              <h3 className="font-bold text-gray-800 mb-2">Priority Access</h3>
+              <p className="text-gray-700 text-sm">Be the first to use PGOwner when we launch</p>
+            </div>
+            <div className="bg-white/30 backdrop-blur-sm rounded-xl p-6 border border-white/40">
+              <h3 className="font-bold text-gray-800 mb-2">Exclusive Features</h3>
+              <p className="text-gray-700 text-sm">Access to beta features and direct founder feedback</p>
+            </div>
+            <div className="bg-white/30 backdrop-blur-sm rounded-xl p-6 border border-white/40">
+              <h3 className="font-bold text-gray-800 mb-2">Special Pricing</h3>
+              <p className="text-gray-700 text-sm">Lock in early bird pricing for life</p>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Background Animation */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-10 left-10 w-20 h-20 bg-orange-500/10 rounded-full animate-float" />
-        <div className="absolute top-20 right-20 w-16 h-16 bg-blue-500/10 rotate-45 animate-pulse" />
-        <div className="absolute bottom-20 left-20 w-24 h-24 bg-green-500/10 rounded-lg animate-spin" style={{ animationDuration: '12s' }} />
-        <div className="absolute bottom-10 right-10 w-18 h-18 bg-purple-500/10 rounded-full animate-bounce" />
-      </div>
+      {/* Floating Elements */}
+      <div className="absolute top-20 left-10 w-20 h-20 bg-orange-400/20 rounded-full animate-float"></div>
+      <div className="absolute bottom-20 right-10 w-16 h-16 bg-blue-400/20 rounded-full animate-float" style={{ animationDelay: '1s' }}></div>
     </section>
   );
 };

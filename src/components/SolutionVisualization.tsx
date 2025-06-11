@@ -1,122 +1,134 @@
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { Button } from '@/components/ui/button';
+import { Smartphone, Shield, Zap, Users } from 'lucide-react';
 
 const SolutionVisualization = () => {
-  const [activeScreen, setActiveScreen] = useState(0);
-
-  const screens = [
+  const features = [
     {
+      icon: Smartphone,
       title: "Smart Dashboard",
-      description: "Real-time notifications and property overview",
-      color: "from-blue-500 to-blue-600"
+      description: "Real-time insights at your fingertips"
     },
     {
-      title: "Digital Vault",
-      description: "Secure document storage and management",
-      color: "from-green-500 to-green-600"
+      icon: Shield,
+      title: "Secure Vault",
+      description: "Your documents, safely stored"
     },
     {
-      title: "Issue Tracking",
-      description: "Streamlined maintenance and support requests",
-      color: "from-purple-500 to-purple-600"
+      icon: Zap,
+      title: "Instant Updates",
+      description: "Stay connected, stay informed"
     },
     {
-      title: "Payment History",
-      description: "Complete financial tracking and reporting",
-      color: "from-orange-500 to-orange-600"
+      icon: Users,
+      title: "Community Hub",
+      description: "Connect with your PG community"
     }
   ];
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveScreen((prev) => (prev + 1) % screens.length);
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, [screens.length]);
-
   return (
-    <section className="py-20 bg-gradient-to-b from-gray-800 to-blue-900 relative overflow-hidden">
+    <section className="py-20 relative overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">
-            Barge In ThynkOwner like a King
+          <h2 className="text-4xl lg:text-5xl font-bold text-gray-800 mb-6">
+            Welcome to{' '}
+            <span className="bg-gradient-to-r from-orange-500 to-blue-500 bg-clip-text text-transparent">
+              PGOwner
+            </span>
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Experience the future of PG management with our intuitive platform
+          <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+            Step into the future of PG management like a king. Experience seamless control, 
+            instant connectivity, and unparalleled convenience.
           </p>
         </div>
 
-        <div className="flex flex-col lg:flex-row items-center justify-between max-w-6xl mx-auto">
-          {/* 3D Phone Mockup */}
-          <div className="relative lg:w-1/2 mb-12 lg:mb-0">
-            <div className="relative mx-auto w-80 h-80">
-              {/* Phone Frame */}
-              <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl shadow-2xl transform rotate-12 hover:rotate-6 transition-transform duration-500">
-                <div className="p-6 h-full">
-                  {/* Screen Content */}
-                  <div className={`h-full bg-gradient-to-br ${screens[activeScreen].color} rounded-2xl p-4 flex flex-col justify-center items-center text-white transform transition-all duration-500`}>
-                    <div className="text-6xl mb-4 animate-bounce">
-                      {activeScreen === 0 && '📊'}
-                      {activeScreen === 1 && '🗂️'}
-                      {activeScreen === 2 && '🔧'}
-                      {activeScreen === 3 && '💳'}
+        <div className="relative max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Phone Mockup */}
+            <div className="relative order-2 lg:order-1">
+              <div className="relative mx-auto w-80 h-[600px]">
+                {/* Phone Frame */}
+                <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-black rounded-[3rem] shadow-2xl">
+                  {/* Screen */}
+                  <div className="absolute top-6 left-6 right-6 bottom-6 bg-white rounded-[2rem] overflow-hidden">
+                    {/* App Interface Mockup */}
+                    <div className="p-6 h-full bg-gradient-to-br from-blue-50 to-orange-50">
+                      <div className="flex items-center justify-between mb-6">
+                        <h3 className="text-lg font-bold text-gray-800">PGOwner</h3>
+                        <div className="w-8 h-8 bg-orange-500 rounded-full"></div>
+                      </div>
+                      
+                      <div className="space-y-4">
+                        <div className="bg-white rounded-lg p-4 shadow-sm">
+                          <div className="flex items-center justify-between">
+                            <span className="text-sm text-gray-600">Monthly Rent</span>
+                            <span className="font-bold text-green-600">₹15,000</span>
+                          </div>
+                        </div>
+                        
+                        <div className="bg-white rounded-lg p-4 shadow-sm">
+                          <div className="flex items-center justify-between">
+                            <span className="text-sm text-gray-600">Due Date</span>
+                            <span className="font-bold text-orange-600">5 days</span>
+                          </div>
+                        </div>
+                        
+                        <div className="bg-white rounded-lg p-4 shadow-sm">
+                          <div className="flex items-center justify-between">
+                            <span className="text-sm text-gray-600">Complaints</span>
+                            <span className="font-bold text-blue-600">2 Active</span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <h3 className="text-xl font-bold mb-2 text-center">
-                      {screens[activeScreen].title}
-                    </h3>
-                    <p className="text-sm opacity-90 text-center">
-                      {screens[activeScreen].description}
-                    </p>
                   </div>
                 </div>
+                
+                {/* Floating Elements */}
+                <div className="absolute -top-10 -right-10 w-20 h-20 bg-orange-400/20 rounded-full animate-pulse"></div>
+                <div className="absolute -bottom-10 -left-10 w-16 h-16 bg-blue-400/20 rounded-full animate-bounce"></div>
               </div>
-
-              {/* Floating Elements */}
-              <div className="absolute -top-10 -left-10 w-20 h-20 bg-orange-500/20 rounded-full animate-pulse" />
-              <div className="absolute -bottom-10 -right-10 w-16 h-16 bg-blue-500/20 rounded-lg animate-spin" style={{ animationDuration: '8s' }} />
-              <div className="absolute top-1/2 -left-16 w-12 h-12 bg-green-500/20 rounded-full animate-bounce" />
             </div>
-          </div>
 
-          {/* Feature List */}
-          <div className="lg:w-1/2 lg:pl-12">
-            <div className="space-y-6">
-              {screens.map((screen, index) => (
-                <div
+            {/* Features List */}
+            <div className="space-y-8 order-1 lg:order-2">
+              {features.map((feature, index) => (
+                <div 
                   key={index}
-                  className={`p-6 rounded-lg border transition-all duration-500 cursor-pointer ${
-                    activeScreen === index
-                      ? 'bg-white/10 border-orange-500 shadow-lg transform scale-105'
-                      : 'bg-white/5 border-gray-600 hover:bg-white/10'
-                  }`}
-                  onClick={() => setActiveScreen(index)}
+                  className="flex items-start space-x-4 group"
+                  style={{ animationDelay: `${index * 0.2}s` }}
                 >
-                  <h3 className="text-xl font-bold text-white mb-2">
-                    {screen.title}
-                  </h3>
-                  <p className="text-gray-300">
-                    {screen.description}
-                  </p>
-                  {activeScreen === index && (
-                    <div className="mt-3 w-full bg-gray-700 rounded-full h-1">
-                      <div className="bg-orange-500 h-1 rounded-full animate-pulse" style={{ width: '100%' }} />
-                    </div>
-                  )}
+                  <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-orange-500 to-blue-500 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <feature.icon className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-800 mb-2 group-hover:text-orange-600 transition-colors duration-300">
+                      {feature.title}
+                    </h3>
+                    <p className="text-gray-600 leading-relaxed">
+                      {feature.description}
+                    </p>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
+
+          <div className="text-center mt-16">
+            <Button 
+              size="lg"
+              className="bg-gradient-to-r from-orange-500 to-blue-500 hover:from-orange-600 hover:to-blue-600 text-white px-8 py-4 text-lg rounded-full shadow-xl transform hover:scale-105 transition-all duration-300"
+            >
+              Experience PGOwner Today
+            </Button>
+          </div>
         </div>
       </div>
 
-      {/* Background Floating Shapes */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-20 left-10 w-32 h-32 bg-orange-500/10 rounded-full animate-float" />
-        <div className="absolute top-40 right-20 w-24 h-24 bg-blue-500/10 rotate-45 animate-pulse" />
-        <div className="absolute bottom-40 left-20 w-40 h-40 bg-green-500/10 rounded-lg animate-spin" style={{ animationDuration: '15s' }} />
-        <div className="absolute bottom-20 right-10 w-28 h-28 bg-purple-500/10 rounded-full animate-bounce" />
-      </div>
+      {/* Background Decorations */}
+      <div className="absolute top-1/4 left-0 w-64 h-64 bg-gradient-to-r from-orange-400/10 to-blue-400/10 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-gradient-to-l from-purple-400/10 to-pink-400/10 rounded-full blur-3xl"></div>
     </section>
   );
 };
